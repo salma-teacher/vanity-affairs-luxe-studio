@@ -235,3 +235,11 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
   .cards, .gallery, .steps, .footer-grid, .form-row { grid-template-columns: 1fr; }
   .hero .btn-ghost { margin: 12px 0 0; }
 }
+
+/* Videos */
+.video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
+.video { margin: 0; }
+.video-frame { position: relative; aspect-ratio: 16 / 9; background: #141110; }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video figcaption { font-family: var(--serif); font-size: 21px; margin-top: 12px; }
+@media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } }

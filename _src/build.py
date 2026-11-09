@@ -137,6 +137,23 @@ PAGES = {
     },
 }
 
+# YouTube videos (id, caption) shown on the Music Videos and Movies pages
+VIDEOS = {
+    "music-videos": [
+        ("5KL-JAe4KfM", "Jassi Sidhu & DJ K Square – Haa Kurvakeh"),
+        ("s8pLOGoWd3A", "Sukh Jay – Challenge"),
+        ("jx51Xw-hhew", "Astha Tamang – Jealous"),
+        ("U0UZb8HMa1s", "Yashvi ft. DJ K Square – Come Here"),
+        ("YidUdtDNGk0", "Astha Tamang – Ride"),
+    ],
+    "movies": [
+        ("oJsH4sM5BdM", "Taken Too Far"),
+        ("SiF-yi6oTCk", "On the Twelfth Day of Christmas"),
+        ("2DZi444H6-E", "On Again Off Again by Arsalan Shirazi"),
+        ("6Pv9e4Rd5_4", "Mrs. Jones by OJ Oboirah"),
+    ],
+}
+
 # ---------------------------------------------------------------- helpers
 e = html.escape
 
@@ -152,10 +169,29 @@ def photos(slug, count=6, label="Photo coming soon"):
     return "\n".join(f'<div class="photo placeholder" data-label="{e(label)}"></div>' for _ in range(count))
 
 
+def videos(slug):
+    items = VIDEOS.get(slug, [])
+    return "\n".join(
+        f"""<figure class="video">
+  <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/{vid}?rel=0" title="{e(cap)}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+  <figcaption>{e(cap)}</figcaption>
+</figure>"""
+        for vid, cap in items
+    )
+
+
+def has_photos(slug):
+    folder = ROOT / "images" / slug
+    return folder.exists() and any(p.suffix.lower() in IMG_EXT for p in folder.glob("*"))
+
+
 def cover(slug, wide=False):
     folder = ROOT / "images" / slug
     files = sorted(p for p in folder.glob("*") if p.suffix.lower() in IMG_EXT) if folder.exists() else []
     cls = "photo wide" if wide else "photo"
+    if not files and VIDEOS.get(slug):
+        vid = VIDEOS[slug][0][0]
+        return f'<div class="{cls}"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy"></div>'
     if files:
         return f'<div class="{cls}"><img src="images/{slug}/{files[0].name}" alt="" loading="lazy"></div>'
     return f'<div class="{cls} placeholder" data-label="{e(PAGES[slug]["eyebrow"]) if slug in PAGES else ""}"></div>'
@@ -345,6 +381,24 @@ def build_portfolio(slug, label):
     p = PAGES[slug]
     paras = "\n".join(f"<p>{e(x)}</p>" for x in p["body"])
     feats = "\n".join(f"<li>{e(x)}</li>" for x in p["features"])
+    media = ""
+    if VIDEOS.get(slug):
+        media += f"""<section>
+  <div class="wrap">
+    <div class="video-grid">
+{videos(slug)}
+    </div>
+  </div>
+</section>"""
+    if has_photos(slug) or not VIDEOS.get(slug):
+        media += f"""
+<section>
+  <div class="wrap">
+    <div class="gallery">
+{photos(slug)}
+    </div>
+  </div>
+</section>"""
     body = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">{e(p['eyebrow'])}</p>
@@ -353,13 +407,7 @@ def build_portfolio(slug, label):
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="gallery">
-{photos(slug)}
-    </div>
-  </div>
-</section>
+{media}
 
 <section class="alt">
   <div class="wrap two-col">
