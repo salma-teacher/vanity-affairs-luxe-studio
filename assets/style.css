@@ -1,15 +1,21 @@
 /* Vanity Affairs Luxe Studio — site styles */
 :root {
-  --ink: #1c1917;
-  --ink-soft: #57534e;
-  --cream: #faf6f1;
-  --blush: #f1e4dc;
-  --rose: #b76e79;
-  --gold: #b08d57;
-  --line: #e7dcd2;
+  --ink: #2a1530;
+  --ink-soft: #5f4a66;
+  --cream: #faf6f9;
+  --blush: #f1e6f2;
+  --rose: #8e4fa6;
+  --gold: #b98a7a;
+  --rosegold: #d2a796;
+  --plum: #1f0e20;
+  --plum-2: #2e1533;
+  --amethyst: #6e3485;
+  --lavender: #b48bc9;
+  --line: #e9dcea;
   --white: #ffffff;
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --script: "Great Vibes", "Brush Script MT", cursive;
   --max: 1180px;
 }
 
@@ -250,3 +256,91 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 .photo.thumb { background: #141110; }
 .photo.thumb img { object-position: center; transform: scale(2); }
 .card:hover .photo.thumb img { transform: scale(2.08); }
+
+
+/* =========================================================
+   Theme: Amethyst & Rose Gold (matches the VA logo)
+   ========================================================= */
+.script { font-family: var(--script); font-size: 34px; color: var(--lavender); margin: 0 0 18px; line-height: 1.2; }
+
+/* Header */
+.site-header { background: rgba(31, 14, 32, 0.97); border-bottom: 1px solid rgba(210, 167, 150, 0.35); }
+.header-inner { height: 84px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-logo { width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(210,167,150,.45); }
+.brand-name { color: #f4e9f1; }
+.brand-tag { color: var(--rosegold); }
+.nav a, .dropdown > button { color: #d8c6dc; }
+.nav a:hover, .nav a[aria-current="page"] { color: #fff; border-color: var(--rosegold); }
+.dropdown-menu { background: var(--plum-2); border-color: rgba(210,167,150,.3); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.dropdown-menu a:hover { background: rgba(180,139,201,.15); }
+.nav .btn { background: var(--rosegold); border-color: var(--rosegold); color: var(--plum); }
+.nav .btn:hover { background: transparent; color: var(--rosegold); }
+.menu-toggle span { background: #f4e9f1; }
+
+/* Buttons */
+.btn { background: var(--plum-2); border-color: var(--plum-2); color: #f8eef5; }
+.btn:hover { background: transparent; color: var(--plum-2); }
+.btn-ghost { background: transparent; color: var(--plum-2); }
+.btn-ghost:hover { background: var(--plum-2); color: #f8eef5; }
+
+/* Hero */
+.hero { background-color: var(--plum); }
+.hero[style] { background-size: cover; background-position: center; }
+.hero:not([style]) { background: radial-gradient(ellipse at 50% 30%, #4a2252 0%, var(--plum) 70%); }
+.hero .eyebrow { color: var(--rosegold); }
+.hero .script { font-size: 40px; }
+.hero .btn { background: var(--rosegold); border-color: var(--rosegold); color: var(--plum); }
+.hero .btn:hover { background: transparent; color: var(--rosegold); }
+.hero .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.85); }
+.hero .btn-ghost:hover { background: #fff; color: var(--plum); }
+
+/* Page headers: plum "marble" band like the logo */
+.page-hero {
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(180,139,201,.22), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(110,52,133,.35), transparent 60%),
+    var(--plum);
+  color: #f6edf3;
+  border-bottom: 1px solid rgba(210,167,150,.35);
+}
+.page-hero .eyebrow { color: var(--rosegold); }
+.page-hero p { color: #d6c4da; }
+
+/* Accents */
+.eyebrow { color: var(--amethyst); }
+.feature-list li::before { color: var(--rosegold); }
+.step { border-top-color: var(--rosegold); }
+.step::before { color: var(--amethyst); }
+.card-link { color: var(--amethyst); }
+.contact-item span { color: var(--amethyst); }
+input:focus, select:focus, textarea:focus { border-color: var(--lavender); }
+
+/* Placeholders in amethyst tones */
+.photo { background: linear-gradient(135deg, #e6d5ea, #b48bc9 55%, #6e3485); }
+.photo.placeholder:nth-child(3n+2) { background: linear-gradient(135deg, #efe0e4, #d2a796 60%, #8e5f6e); }
+.photo.placeholder:nth-child(3n) { background: linear-gradient(135deg, #e9dcf0, #8e4fa6 55%, #2e1533); }
+.photo.thumb, .video-frame { background: var(--plum); }
+
+/* Booking band & footer */
+.cta-band { background: radial-gradient(ellipse at 50% 0%, #3d1c45 0%, var(--plum) 70%); border-top: 1px solid rgba(210,167,150,.3); }
+.cta-band .eyebrow { color: var(--rosegold); }
+.cta-band p { color: #d6c4da; }
+.cta-band .btn { background: var(--rosegold); border-color: var(--rosegold); color: var(--plum); }
+.cta-band .btn:hover { background: transparent; color: var(--rosegold); }
+.site-footer { background: #160a17; color: #c2b0c6; }
+.site-footer h4 { color: var(--rosegold); }
+.site-footer .script { font-size: 28px; margin: 6px 0 10px; }
+.footer-logo { width: 96px; height: 96px; border-radius: 50%; margin-bottom: 16px; }
+.copyright { border-top-color: #2e1a31; }
+
+@media (max-width: 960px) {
+  .nav { background: var(--plum); border-bottom-color: rgba(210,167,150,.35); top: 84px; }
+  .nav > a, .dropdown { border-bottom-color: rgba(255,255,255,.08); }
+}
+@media (max-width: 600px) {
+  .brand-logo { width: 44px; height: 44px; }
+  .brand-name { font-size: 21px; }
+  .brand-tag { font-size: 9px; letter-spacing: .22em; }
+  .hero .script { font-size: 32px; }
+}

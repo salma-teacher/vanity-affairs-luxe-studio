@@ -231,8 +231,11 @@ def header(current):
     return f"""<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Vanity Affairs Luxe Studio logo" width="56" height="56">
+      <span class="brand-text">
       <span class="brand-name">{e(SITE['name'])}</span>
       <span class="brand-tag">{e(SITE['tag'])}</span>
+      </span>
     </a>
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav" aria-label="Main">
@@ -256,7 +259,9 @@ def footer():
   <div class="wrap">
     <div class="footer-grid">
       <div>
+        <img class="footer-logo" src="assets/logo.png" alt="" width="96" height="96">
         <span class="brand-name">{e(SITE['name'])}</span>
+        <p class="script">Enhance. Empower. Radiate.</p>
         <p>Professional makeup artistry for brides, events, fashion, film and television. Serving Canada since 2015.</p>
       </div>
       <div>
@@ -297,7 +302,11 @@ def page(filename, title, description, body, hero_style=""):
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:image" content="assets/logo-full.jpg">
+<meta name="theme-color" content="#1f0e20">
 <link rel="stylesheet" href="assets/style.css?v={CSS_VERSION}">
 </head>
 <body>
@@ -331,11 +340,12 @@ def build_home():
         for s, t in PORTFOLIO
     )
     hero_img = ROOT / "images" / "home" / "hero.jpg"
-    style = ' style="background-image: linear-gradient(180deg, rgba(28,25,23,.30), rgba(28,25,23,.60)), url(images/home/hero.jpg)"' if hero_img.exists() else ""
+    style = ' style="background-image: linear-gradient(180deg, rgba(31,14,32,.50), rgba(31,14,32,.78)), url(images/home/hero.jpg)"' if hero_img.exists() else ""
     body = f"""<section class="hero"{style}>
   <div class="hero-inner">
     <p class="eyebrow">Toronto Makeup Artist · Serving Canada Since 2015</p>
     <h1>Luxury makeup for life's most beautiful moments</h1>
+    <p class="script">Enhance. Empower. Radiate.</p>
     <p class="lead">Bridal, fashion, film and television makeup by certified makeup artist {e(SITE['artist'])}.</p>
     <a class="btn" href="contact.html">Book your appointment</a>
     <a class="btn btn-ghost" href="#portfolio">View portfolio</a>
