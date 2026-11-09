@@ -201,7 +201,7 @@ def cover(slug, wide=False):
     cls = "photo wide" if wide else "photo"
     if not files and VIDEOS.get(slug):
         vid = VIDEOS[slug][0][0]
-        return f'<div class="{cls}"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy"></div>'
+        return f'<div class="{cls} thumb"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy"></div>'
     if files:
         return f'<div class="{cls}"><img src="images/{slug}/{files[0].name}" alt="" loading="lazy"></div>'
     return f'<div class="{cls} placeholder" data-label="{e(PAGES[slug]["eyebrow"]) if slug in PAGES else ""}"></div>'

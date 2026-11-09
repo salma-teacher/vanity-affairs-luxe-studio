@@ -245,3 +245,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 @media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } }
 .video.featured { grid-column: 1 / -1; }
 .video.featured figcaption { font-size: 26px; }
+
+/* Video thumbnails on the home page cards: zoom past YouTube's black bars */
+.photo.thumb { background: #141110; }
+.photo.thumb img { object-position: center; transform: scale(2); }
+.card:hover .photo.thumb img { transform: scale(2.08); }
