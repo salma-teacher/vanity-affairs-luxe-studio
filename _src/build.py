@@ -11,6 +11,9 @@ import html
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp"}
+import hashlib
+# Changes whenever style.css changes, so browsers always load the latest design
+CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes()).hexdigest()[:8]
 
 # ---------------------------------------------------------------- settings
 SITE = {
@@ -295,7 +298,7 @@ def page(filename, title, description, body, hero_style=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v={CSS_VERSION}">
 </head>
 <body>
 {header(filename)}
