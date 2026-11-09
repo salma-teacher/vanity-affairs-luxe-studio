@@ -67,6 +67,7 @@ PAGES = {
             "Special-event and evening makeup",
             "Editorial and fashion photoshoots",
             "Runway and backstage teams",
+            "Creative, fantasy and body-art looks",
             "Lash application and skin preparation",
         ],
     },
