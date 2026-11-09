@@ -18,7 +18,7 @@ CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes()).hexdiges
 # ---------------------------------------------------------------- settings
 SITE = {
     "name": "Vanity Affairs Luxe Studio",
-    "tag": "Makeup Artistry · Since 2008",
+    "tag": "Serving Canada Since 2015",
     "artist": "Salma Sami Khan",
     "city": "Toronto & the GTA",
     # TODO: replace with real details
@@ -257,7 +257,7 @@ def footer():
     <div class="footer-grid">
       <div>
         <span class="brand-name">{e(SITE['name'])}</span>
-        <p>Professional makeup artistry for brides, events, fashion, film and television. Serving {e(SITE['city'])} since 2008.</p>
+        <p>Professional makeup artistry for brides, events, fashion, film and television. Serving Canada since 2015.</p>
       </div>
       <div>
         <h4>Portfolio</h4>
@@ -334,7 +334,7 @@ def build_home():
     style = ' style="background-image: linear-gradient(180deg, rgba(28,25,23,.30), rgba(28,25,23,.60)), url(images/home/hero.jpg)"' if hero_img.exists() else ""
     body = f"""<section class="hero"{style}>
   <div class="hero-inner">
-    <p class="eyebrow">Toronto Makeup Artist · Since 2008</p>
+    <p class="eyebrow">Toronto Makeup Artist · Serving Canada Since 2015</p>
     <h1>Luxury makeup for life's most beautiful moments</h1>
     <p class="lead">Bridal, fashion, film and television makeup by certified makeup artist {e(SITE['artist'])}.</p>
     <a class="btn" href="contact.html">Book your appointment</a>
@@ -347,7 +347,7 @@ def build_home():
     <div>
       <p class="eyebrow">Welcome</p>
       <h2>Artistry that feels like you, only more radiant</h2>
-      <p>Vanity Affairs Luxe Studio has been creating beautiful, long-lasting makeup since 2008. From intimate bridal mornings to busy film sets and runway shows, every look is tailored to the person, the occasion and the camera.</p>
+      <p>Vanity Affairs Luxe Studio has been creating beautiful, long-lasting makeup for clients across Canada since 2015. From intimate bridal mornings to busy film sets and runway shows, every look is tailored to the person, the occasion and the camera.</p>
       <p>The goal is simple: you should look like the most confident version of yourself, and feel completely at ease in the chair.</p>
       <a class="btn btn-ghost" href="about.html">About the artist</a>
     </div>
@@ -385,7 +385,7 @@ def build_home():
 
 {CTA}"""
     page("index.html", SITE["name"],
-         "Vanity Affairs Luxe Studio: luxury bridal, party, fashion, film and television makeup in Toronto and the GTA since 2008.",
+         "Vanity Affairs Luxe Studio: luxury bridal, party, fashion, film and television makeup in Toronto, serving Canada since 2015.",
          body)
 
 
@@ -462,7 +462,7 @@ def build_about():
       <p>Having worked with clients from many cultures and backgrounds, I'm comfortable with a wide range of skin tones, traditions and styles, from soft, natural looks to full glamour.</p>
       <ul class="feature-list">
         <li>Certified makeup artist: bridal, film and runway</li>
-        <li>Running Vanity Affairs Luxe Studio since 2008</li>
+        <li>Serving clients across Canada since 2015</li>
         <li>Based in Toronto, available for travel across the GTA</li>
       </ul>
     </div>
