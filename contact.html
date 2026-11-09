@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &amp; Booking | Vanity Affairs Luxe Studio</title>
+<meta name="description" content="Book bridal, event, fashion or film makeup with Vanity Affairs Luxe Studio in Toronto &amp; the GTA.">
+<meta property="og:title" content="Contact &amp; Booking | Vanity Affairs Luxe Studio">
+<meta property="og:description" content="Book bridal, event, fashion or film makeup with Vanity Affairs Luxe Studio in Toronto &amp; the GTA.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Vanity Affairs Luxe Studio</span>
+      <span class="brand-tag">Makeup Artistry · Since 2008</span>
+    </a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button type="button">Portfolio</button>
+        <div class="dropdown-menu">
+<a href="bridal.html">Bridal</a>
+<a href="party-fashion.html">Party &amp; Fashion</a>
+<a href="celebrities.html">Celebrities</a>
+<a href="commercials.html">Commercials</a>
+<a href="music-videos.html">Music Videos</a>
+<a href="movies.html">Movies</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a class="btn" href="contact.html">Book Now</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>Book your appointment</h1>
+    <p>Share a few details about your event and I'll reply with availability and a personalised quote.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Get in touch</h2>
+      <p class="note">Popular dates, especially wedding weekends, book up early. I recommend enquiring as soon as your date is confirmed.</p>
+      <div class="contact-item"><span>Service area</span><strong>Toronto &amp; the GTA</strong></div>
+    </div>
+    <form action="#" onsubmit="alert('The booking form will be connected soon. Please contact us directly in the meantime.'); return false;">
+      <div class="form-row">
+        <label>Name<input name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+      </div>
+      <div class="form-row">
+        <label>Phone<input type="tel" name="phone"></label>
+        <label>Event date<input type="date" name="date"></label>
+      </div>
+      <div class="form-row">
+        <label>Service
+          <select name="service">
+<option>Bridal</option>
+<option>Party &amp; Fashion</option>
+<option>Celebrities</option>
+<option>Commercials</option>
+<option>Music Videos</option>
+<option>Movies</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Number of people<input type="number" name="people" min="1" value="1"></label>
+      </div>
+      <label>Location<input name="location" placeholder="City or venue"></label>
+      <label>Tell me about your look<textarea name="message" rows="5"></textarea></label>
+      <div><button class="btn" type="submit">Send enquiry</button></div>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="brand-name">Vanity Affairs Luxe Studio</span>
+        <p>Professional makeup artistry for brides, events, fashion, film and television. Serving Toronto &amp; the GTA since 2008.</p>
+      </div>
+      <div>
+        <h4>Portfolio</h4>
+        <ul>
+<li><a href="bridal.html">Bridal</a></li>
+<li><a href="party-fashion.html">Party &amp; Fashion</a></li>
+<li><a href="celebrities.html">Celebrities</a></li>
+<li><a href="commercials.html">Commercials</a></li>
+<li><a href="music-videos.html">Music Videos</a></li>
+<li><a href="movies.html">Movies</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+<li>Toronto &amp; the GTA</li>
+          <li><a href="contact.html">Booking enquiry</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year">2026</span> Vanity Affairs Luxe Studio. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const t = document.querySelector('.menu-toggle'), n = document.querySelector('.nav');
+  t.addEventListener('click', () => { const o = n.classList.toggle('open'); t.setAttribute('aria-expanded', o); });
+</script>
+</body>
+</html>
