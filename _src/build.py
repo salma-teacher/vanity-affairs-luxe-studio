@@ -281,7 +281,7 @@ def build_home():
         for s, t in PORTFOLIO
     )
     hero_img = ROOT / "images" / "home" / "hero.jpg"
-    style = ' style="--hero-img: url(images/home/hero.jpg)"' if hero_img.exists() else ""
+    style = ' style="background-image: linear-gradient(180deg, rgba(28,25,23,.30), rgba(28,25,23,.60)), url(images/home/hero.jpg)"' if hero_img.exists() else ""
     body = f"""<section class="hero"{style}>
   <div class="hero-inner">
     <p class="eyebrow">Toronto Makeup Artist · Since 2008</p>
@@ -301,7 +301,7 @@ def build_home():
       <p>The goal is simple: you should look like the most confident version of yourself, and feel completely at ease in the chair.</p>
       <a class="btn btn-ghost" href="about.html">About the artist</a>
     </div>
-    {cover('bridal')}
+    <div class="photo"><img src="images/bridal/02.jpg" alt="Bride with soft glam makeup holding a white bouquet" loading="lazy"></div>
   </div>
 </section>
 
