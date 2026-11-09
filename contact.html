@@ -60,9 +60,12 @@
     <div>
       <h2>Get in touch</h2>
       <p class="note">Popular dates, especially wedding weekends, book up early. I recommend enquiring as soon as your date is confirmed.</p>
-      <div class="contact-item"><span>Service area</span><strong>Toronto &amp; the GTA</strong></div>
+      <div class="contact-item"><span>WhatsApp</span><a class="js-wa " href="contact.html" data-a="16479" data-b="221139" target="_blank" rel="noopener">Chat with me on WhatsApp →</a></div><div class="contact-item"><span>Email</span><a class="js-mail " href="contact.html" data-u="sqamlas" data-d="moc.liamg">Email us</a></div><div class="contact-item"><span>Service area</span><strong>Toronto &amp; the GTA</strong></div>
     </div>
-    <form action="#" onsubmit="alert('The booking form will be connected soon. Please contact us directly in the meantime.'); return false;">
+    <form class="js-form" method="POST" data-u="sqamlas" data-d="moc.liamg">
+      <input type="hidden" name="_subject" value="New booking enquiry – Vanity Affairs Luxe Studio">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <div class="form-row">
         <label>Name<input name="name" required></label>
         <label>Email<input type="email" name="email" required></label>
@@ -115,6 +118,8 @@
       <div>
         <h4>Get in touch</h4>
         <ul>
+<li><a class="js-wa " href="contact.html" data-a="16479" data-b="221139" target="_blank" rel="noopener">WhatsApp</a></li>
+<li><a class="js-mail " href="contact.html" data-u="sqamlas" data-d="moc.liamg">Email us</a></li>
 <li>Toronto &amp; the GTA</li>
           <li><a href="contact.html">Booking enquiry</a></li>
         </ul>
@@ -125,6 +130,16 @@
 </footer>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  const msg = encodeURIComponent("Hi! I found Vanity Affairs Luxe Studio online and I'd like to ask about booking.");
+  document.querySelectorAll('.js-wa').forEach(a => { a.href = 'https://wa.me/' + a.dataset.a + a.dataset.b + '?text=' + msg; });
+  document.querySelectorAll('.js-mail').forEach(a => {
+    const m = a.dataset.u.split('').reverse().join('') + '@' + a.dataset.d.split('').reverse().join('');
+    a.href = 'mailto:' + m + '?subject=' + encodeURIComponent('Booking enquiry');
+    if (a.dataset.show) a.textContent = m;
+  });
+  document.querySelectorAll('form.js-form').forEach(f => {
+    f.action = 'https://formsubmit.co/' + f.dataset.u.split('').reverse().join('') + '@' + f.dataset.d.split('').reverse().join('');
+  });
   const t = document.querySelector('.menu-toggle'), n = document.querySelector('.nav');
   t.addEventListener('click', () => { const o = n.classList.toggle('open'); t.setAttribute('aria-expanded', o); });
 </script>

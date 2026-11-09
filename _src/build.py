@@ -22,8 +22,12 @@ SITE = {
     "artist": "Salma Sami Khan",
     "city": "Toronto & the GTA",
     # TODO: replace with real details
-    "email": "",          # e.g. "hello@vanityaffairsluxestudio.com"
-    "phone": "",          # e.g. "+1 416 555 0123"
+    # Email and WhatsApp are never written into the HTML as plain text:
+    # they are split up and reassembled in the browser, so spam bots that
+    # scan web pages can't harvest them. The phone number is not displayed.
+    "email": "salmaqs@gmail.com",
+    "whatsapp": "16479221139",   # digits only, with country code
+    "phone": "",          # leave blank to keep the number off the page
     "instagram": "",      # e.g. "vanityaffairsluxestudio"
 }
 
@@ -210,12 +214,29 @@ def cover(slug, wide=False):
     return f'<div class="{cls} placeholder" data-label="{e(PAGES[slug]["eyebrow"]) if slug in PAGES else ""}"></div>'
 
 
+def _split(text):
+    h = len(text) // 2
+    return text[:h], text[h:]
+
+
+def wa_link(label="Message on WhatsApp", cls=""):
+    a, b = _split(SITE["whatsapp"])
+    return f'<a class="js-wa {cls}" href="contact.html" data-a="{a}" data-b="{b}" target="_blank" rel="noopener">{label}</a>'
+
+
+def email_link(cls=""):
+    user, dom = SITE["email"].split("@")
+    return f'<a class="js-mail {cls}" href="contact.html" data-u="{user[::-1]}" data-d="{dom[::-1]}">Email us</a>'
+
+
 def contact_lines():
     items = []
     if SITE["phone"]:
         items.append(f'<li><a href="tel:{e(SITE["phone"].replace(" ", ""))}">{e(SITE["phone"])}</a></li>')
+    if SITE["whatsapp"]:
+        items.append(f"<li>{wa_link('WhatsApp')}</li>")
     if SITE["email"]:
-        items.append(f'<li><a href="mailto:{e(SITE["email"])}">{e(SITE["email"])}</a></li>')
+        items.append(f"<li>{email_link()}</li>")
     if SITE["instagram"]:
         items.append(f'<li><a href="https://instagram.com/{e(SITE["instagram"])}" target="_blank" rel="noopener">Instagram @{e(SITE["instagram"])}</a></li>')
     items.append(f"<li>{e(SITE['city'])}</li>")
@@ -283,6 +304,16 @@ def footer():
 </footer>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  const msg = encodeURIComponent("Hi! I found Vanity Affairs Luxe Studio online and I'd like to ask about booking.");
+  document.querySelectorAll('.js-wa').forEach(a => {{ a.href = 'https://wa.me/' + a.dataset.a + a.dataset.b + '?text=' + msg; }});
+  document.querySelectorAll('.js-mail').forEach(a => {{
+    const m = a.dataset.u.split('').reverse().join('') + '@' + a.dataset.d.split('').reverse().join('');
+    a.href = 'mailto:' + m + '?subject=' + encodeURIComponent('Booking enquiry');
+    if (a.dataset.show) a.textContent = m;
+  }});
+  document.querySelectorAll('form.js-form').forEach(f => {{
+    f.action = 'https://formsubmit.co/' + f.dataset.u.split('').reverse().join('') + '@' + f.dataset.d.split('').reverse().join('');
+  }});
   const t = document.querySelector('.menu-toggle'), n = document.querySelector('.nav');
   t.addEventListener('click', () => {{ const o = n.classList.toggle('open'); t.setAttribute('aria-expanded', o); }});
 </script>"""
@@ -490,14 +521,16 @@ def build_contact():
     items = []
     if SITE["phone"]:
         items.append(f'<div class="contact-item"><span>Phone</span><a href="tel:{e(SITE["phone"].replace(" ", ""))}">{e(SITE["phone"])}</a></div>')
+    if SITE["whatsapp"]:
+        items.append(f'<div class="contact-item"><span>WhatsApp</span>{wa_link("Chat with me on WhatsApp →")}</div>')
     if SITE["email"]:
-        items.append(f'<div class="contact-item"><span>Email</span><a href="mailto:{e(SITE["email"])}">{e(SITE["email"])}</a></div>')
+        items.append(f'<div class="contact-item"><span>Email</span>{email_link()}</div>')
     if SITE["instagram"]:
         items.append(f'<div class="contact-item"><span>Instagram</span><a href="https://instagram.com/{e(SITE["instagram"])}" target="_blank" rel="noopener">@{e(SITE["instagram"])}</a></div>')
     items.append(f'<div class="contact-item"><span>Service area</span><strong>{e(SITE["city"])}</strong></div>')
     services = "\n".join(f"<option>{e(t)}</option>" for _, t in PORTFOLIO)
-    mail_to = SITE["email"]
-    form_action = f'action="mailto:{e(mail_to)}" method="post" enctype="text/plain"' if mail_to else 'action="#" onsubmit="alert(\'The booking form will be connected soon. Please contact us directly in the meantime.\'); return false;"'
+    user, dom = SITE["email"].split("@")
+    form_action = f'class="js-form" method="POST" data-u="{user[::-1]}" data-d="{dom[::-1]}"'
     body = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Contact</p>
@@ -514,6 +547,9 @@ def build_contact():
       {''.join(items)}
     </div>
     <form {form_action}>
+      <input type="hidden" name="_subject" value="New booking enquiry – Vanity Affairs Luxe Studio">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <div class="form-row">
         <label>Name<input name="name" required></label>
         <label>Email<input type="email" name="email" required></label>
