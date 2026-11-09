@@ -146,6 +146,16 @@ VIDEOS = {
         ("U0UZb8HMa1s", "Yashvi ft. DJ K Square – Come Here"),
         ("YidUdtDNGk0", "Astha Tamang – Ride"),
     ],
+    "commercials": [
+        ("IFmXWZLXHQU", "Handi Rice – Ali Kazmi"),
+        ("nEVvzlXOSyo", "Tandoori Flame"),
+        ("9WwiOdnqYaA", "Alokozay Tea – Hindi"),
+        ("vIeYGq2Zz3I", "Alokozay Tea – Arabic"),
+        ("pPQ52opbelw", "401 Dixie Mazda"),
+        ("-dtbf3XrHPM", "Brar's Mango Rasmalai"),
+        ("897LKUx6NNI", "Nanak Lassi"),
+        ("cNagTCO7ix0", "Handi Spices"),
+    ],
     "movies": [
         ("oJsH4sM5BdM", "Taken Too Far"),
         ("SiF-yi6oTCk", "On the Twelfth Day of Christmas"),
@@ -172,11 +182,11 @@ def photos(slug, count=6, label="Photo coming soon"):
 def videos(slug):
     items = VIDEOS.get(slug, [])
     return "\n".join(
-        f"""<figure class="video">
+        f"""<figure class="video{' featured' if i == 0 and len(items) % 2 else ''}">
   <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/{vid}?rel=0" title="{e(cap)}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
   <figcaption>{e(cap)}</figcaption>
 </figure>"""
-        for vid, cap in items
+        for i, (vid, cap) in enumerate(items)
     )
 
 
