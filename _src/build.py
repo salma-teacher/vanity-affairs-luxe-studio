@@ -12,8 +12,9 @@ import html
 ROOT = Path(__file__).resolve().parent.parent
 IMG_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 import hashlib
+from datetime import date
 # Changes whenever style.css changes, so browsers always load the latest design
-CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes()).hexdigest()[:8]
+CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes() + (ROOT / "assets" / "site.js").read_bytes()).hexdigest()[:8]
 
 # ---------------------------------------------------------------- settings
 SITE = {
@@ -302,6 +303,9 @@ def footer():
     <p class="copyright">© <span id="year">2026</span> {e(SITE['name'])}. All rights reserved.</p>
   </div>
 </footer>
+{wa_link('<svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.2a12.8 12.8 0 0 0 6.1 1.5c7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23c-2 0-3.9-.5-5.5-1.5l-.4-.2-4.1 1.3 1.3-4-.3-.4a10.3 10.3 0 0 1-1.6-5.6C5.4 9.9 10.2 5.3 16 5.3s10.6 4.6 10.6 10.3S21.8 26 16 26zm5.8-7.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.7c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.4c.2.2 2.3 3.5 5.6 4.9 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg><span>Chat on WhatsApp</span>', 'wa-float')}
+<button class="to-top" aria-label="Back to top">↑</button>
+<script src="assets/site.js?v={CSS_VERSION}" defer></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
   const msg = encodeURIComponent("Hi! I found Vanity Affairs Luxe Studio online and I'd like to ask about booking.");
@@ -371,13 +375,14 @@ def build_home():
         for s, t in PORTFOLIO
     )
     hero_img = ROOT / "images" / "home" / "hero.jpg"
-    style = ' style="background-image: linear-gradient(180deg, rgba(31,14,32,.50), rgba(31,14,32,.78)), url(images/home/hero.jpg)"' if hero_img.exists() else ""
-    body = f"""<section class="hero"{style}>
+    bg = '<div class="hero-bg" style="background-image: url(images/home/hero.jpg)"></div>' if hero_img.exists() else ""
+    body = f"""<section class="hero has-bg">
+  {bg}
   <div class="hero-inner">
     <p class="eyebrow">Toronto Makeup Artist · Serving Canada Since 2015</p>
     <h1>Luxury makeup for life's most beautiful moments</h1>
     <p class="script">Enhance. Empower. Radiate.</p>
-    <p class="lead">Bridal, fashion, film and television makeup by certified makeup artist {e(SITE['artist'])}.</p>
+    <p class="lead">Makeup for <span class="rotator" data-words="brides|red carpets|runways|film sets|music videos|celebrations">brides</span>, by certified makeup artist {e(SITE['artist'])}.</p>
     <a class="btn" href="contact.html">Book your appointment</a>
     <a class="btn btn-ghost" href="#portfolio">View portfolio</a>
   </div>
@@ -393,6 +398,14 @@ def build_home():
       <a class="btn btn-ghost" href="about.html">About the artist</a>
     </div>
     <div class="photo"><img src="images/bridal/02.jpg" alt="Bride with soft glam makeup holding a white bouquet" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><span class="num" data-count="{date.today().year - 2015}">{date.today().year - 2015}</span><span class="plus">+</span><p>Years serving Canada</p></div>
+    <div class="stat"><span class="num" data-count="{sum(len(v) for v in VIDEOS.values())}">{sum(len(v) for v in VIDEOS.values())}</span><p>Music videos, films &amp; commercials</p></div>
+    <div class="stat"><span class="num" data-count="{len(PORTFOLIO)}">{len(PORTFOLIO)}</span><p>Specialities, from bridal to film</p></div>
   </div>
 </section>
 
